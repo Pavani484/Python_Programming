@@ -1,4 +1,4 @@
-
+"""
 class Computer:
     def __init__(self,name,age):
         self.name=name
@@ -46,6 +46,63 @@ c1.age="20"
 c1.update()
 print(c1.name)
 print(c2.name)
-#.....................
+#..................
+
+class Pavani:
+    wheels=16
+    def __init__(self,name,age):
+        self.name=name
+        self.age=age
+c1=Pavani("lalli",20)
+print(c1.name,c1.age)
+print(c1.name,c1.wheels)
+#..................
+
+
+class Student:
+    school='ZPHS'
+    def __init__(self,m1,m2,m3):
+        self.m1=m1
+        self.m2=m2
+        self.m3=m3
+    def display(self):
+        return (self.m1+self.m2+self.m3)/3
+    @classmethod
+    def display2(cls):
+        return cls.school
+    @staticmethod
+    def display3():
+        print("hello pavani")
+        print(Student.school)
+s1=Student(1,2,3)
+s2=Student(4,5,6)
+print(s1.display())
+print(s2.display())
+print(s1.display2())
+Student.display3()
+#..................
+
+
+class Student:
+    def __init__(self,name,roll):
+        self.name=name
+        self.roll=roll
+        #self.lap=self.Laptop(8,"hp")
+        ram, brand = input("Enter laptop RAM and brand: ").split()
+        ram = int(ram)
+        self.lap = self.Laptop(ram, brand)
+    def show(self):
+        print(self.name, self.roll)
+        self.lap.show()
+    class Laptop:
+        def __init__(self,ram,brand):
+            self.ram=ram
+            self.brand=brand
+        def show(self) :
+            print(self.ram,self.brand)
+s1=Student("lalli",20)
+s1.show()
+#.................
+"""
 
 
