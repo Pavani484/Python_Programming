@@ -1,4 +1,4 @@
-"""
+
 class Computer:
     def __init__(self,name,age):
         self.name=name
@@ -121,8 +121,6 @@ a1.feat3()
 a1.feat4()
 a1.feat1()
 #..................
-"""
-"""
 a=25
 b=23
 print(a+b)
@@ -285,7 +283,6 @@ print(obj.sumRange(0, 2))  # -2 + 0 + 3 = 1
 print(obj.sumRange(2, 5))  # 3 + -5 + 2 + -1 = -1
 print(obj.sumRange(0, 5))  # -2 + 0 + 3 + -5 + 2 + -1 = -3
 #...................
-"""
 
 
 
