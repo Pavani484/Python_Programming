@@ -155,6 +155,137 @@ if s1>s2:
 else:
     print(" s2 wins")
 #............
+
+class Pavani:
+    def __init__(self,l1,l2):
+        self.l1=l1
+        self.l2=l2
+
+    def sum(self,a=None,b=None,c=None):
+        s=0
+        if a!=None and b!=None and c!=None:
+            s=a+b+c
+        elif a!=None and b!=None:
+            s=a+b
+        else:
+            s=a
+        return s
+s1=Pavani(10,20)
+print(s1.sum(20))
+#............
+
+from abc import ABC, abstractmethod
+
+# Abstract Base Class
+class Computer(ABC):
+    @abstractmethod
+    def process(self):
+        pass
+
+class Laptop(Computer):
+    def process(self):
+        print("Laptop is processing... hello pavani")
+
+class Programmer(Computer):
+    def process(self):   # MUST implement process because of ABC
+        print("Programmer is coding...")
+
+class Whiteboard:
+    def write(self, comp: Computer):   # accept a computer object
+        print("it's writing")
+        comp.process()   # call the process of that object
+# Objects
+lap = Laptop()
+pro = Programmer()
+wh = Whiteboard()
+wh.write(lap)    # passes Laptop
+wh.write(pro)    # passes Programmer
+#............
+class Prime:
+    def __init__(self, limit):
+        self.num = 2  # start from 2 (first prime)
+        self.limit = limit
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        while self.num <= self.limit:
+            current = self.num
+            self.num += 1
+            if self.is_prime(current):
+                return current
+        raise StopIteration
+
+    def is_prime(self, n):
+        if n < 2:
+            return False
+        for i in range(2, int(n ** 0.5) + 1):
+            if n % i == 0:
+                return False
+        return True
+
+
+# Example: prime numbers up to 30
+values = Prime(30)
+
+for v in values:
+    print(v)
+#..............
+
+class Fibonacci:
+    def __init__(self, limit):
+        self.limit = limit   # number of terms
+        self.a, self.b = 0, 1
+        self.count = 0
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.count < self.limit:
+            value = self.a
+            self.a, self.b = self.b, self.a + self.b
+            self.count += 1
+            return value
+        else:
+            raise StopIteration
+
+# Create Fibonacci iterator for 7 terms
+fib = Fibonacci(7)
+
+for num in fib:
+    print(num)
+#.................
+
+try:
+    x = 10 / 2
+except ZeroDivisionError:
+    print("Division by zero")
+else:
+    print("No error, result is:", x)
+finally:
+    print("This always runs")
+
+#........................
+class NumArray:
+
+    def __init__(self, nums: list[int]):
+        self.prefix_sum = [0] * (len(nums) + 1)
+        for i in range(len(nums)):
+            self.prefix_sum[i + 1] = self.prefix_sum[i] + nums[i]
+
+    def sumRange(self, left: int, right: int) -> int:
+        return self.prefix_sum[right + 1] - self.prefix_sum[left]
+# Create object
+obj = NumArray([-2, 0, 3, -5, 2, -1])
+
+# Queries
+print(obj.sumRange(0, 2))  # -2 + 0 + 3 = 1
+print(obj.sumRange(2, 5))  # 3 + -5 + 2 + -1 = -1
+print(obj.sumRange(0, 5))  # -2 + 0 + 3 + -5 + 2 + -1 = -3
+#...................
 """
+
 
 
