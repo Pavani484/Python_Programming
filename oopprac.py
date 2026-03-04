@@ -103,6 +103,58 @@ class Student:
 s1=Student("lalli",20)
 s1.show()
 #.................
+class A:
+    def feat1(self):
+        print("feat1")
+    def feat2(self):
+        print("feat2")
+class B(A):
+    def feat3(self):
+        print("feat3")
+    def feat4(self):
+        print("feat4")
+class C(A):
+    def feat5(self):
+        print("feat5")
+a1=B()
+a1.feat3()
+a1.feat4()
+a1.feat1()
+#..................
+"""
+"""
+a=25
+b=23
+print(a+b)
+print(int.__add__(a,b))
+print(int.__sub__(a,b))
+#..................
+
+class Student:
+    def __init__(self,m1,m2):
+        self.m1=m1
+        self.m2=m2
+    def __add__(self,other):
+        m1=self.m1+self.m2
+        m2=self.m2+other.m2
+        s3=Student(m1,m2)
+        return s3
+    def __gt__(self,other):
+        s1=self.m1+self.m1
+        s2=other.m2+other.m2
+        if s1>s2:
+            return True
+        else:
+            return False
+s1=Student(10,40)
+s2=Student(30,20)
+s3=s1+s2
+print(s3.m1,s3.m2)
+if s1>s2:
+    print(" s1 wins")
+else:
+    print(" s2 wins")
+#............
 """
 
 
