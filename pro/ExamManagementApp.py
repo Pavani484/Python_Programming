@@ -337,3 +337,16 @@ class AttendancePage(tk.Frame):
         self.refresh()
 
 # ------------------ Decoding Page ------------------
+class DecodingPage(tk.Frame):
+    def __init__(self, parent):
+        super().__init__(parent, bg="white")
+        tk.Label(self, text="Decoding", font=("Arial", 14), bg="white").pack(pady=10)
+        self.text = tk.Text(self, height=25); self.text.pack(fill=tk.BOTH, expand=True, padx=20, pady=10)
+        tk.Button(self, text="Show Decoding", bg="#4682B4", fg="white", command=self.show).pack(pady=5)
+
+    def show(self):
+        self.text.delete("1.0", tk.END)
+        for r,ht in store.hall_tickets.items():
+            self.text.insert(tk.END, f"HallTicket {ht} → {r} ({store.students[r]['name']})\n")
+
+# ------------------ Marks Entry Page ------------------
