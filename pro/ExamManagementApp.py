@@ -270,4 +270,17 @@ class StudentCourseMappingPage(tk.Frame):
                        if info["program"]==s["program_id"] and info["sem"]==s["sem"]]
             self.text.insert(tk.END, f"{r} – {s['name']} : {', '.join(courses) if courses else 'No Courses'}\n")
 
-# -
+# ------------------ Fee Page ------------------
+class FeePage(tk.Frame):
+    def __init__(self, parent):
+        super().__init__(parent, bg="white")
+        tk.Label(self, text="Fee & Application", font=("Arial", 14), bg="white").pack(pady=10)
+        self.text = tk.Text(self, height=25); self.text.pack(fill=tk.BOTH, expand=True, padx=20, pady=10)
+        tk.Button(self, text="Generate Fee Status", bg="#4682B4", fg="white", command=self.generate).pack(pady=5)
+
+    def generate(self):
+        self.text.delete("1.0", tk.END)
+        for r,s in store.students.items():
+            self.text.insert(tk.END, f"{r} – {s['name']} : Fee Paid\n")
+
+# ------------------ Exam Time Table Page ------------------
