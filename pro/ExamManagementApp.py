@@ -371,3 +371,21 @@ class MarksEntryPage(tk.Frame):
         self.text.insert(tk.END, f"{r} – {c} : {m}\n")
 
 # ------------------ Results Generation Page ------------------
+class ResultsGenPage(tk.Frame):
+    def __init__(self, parent, app):
+        super().__init__(parent, bg="white")
+        tk.Label(self, text="Results Generation", font=("Arial", 14), bg="white").pack(pady=10)
+        tk.Button(self, text="Generate Results", bg="#4CAF50", fg="white", command=self.generate).pack(pady=5)
+        self.text = tk.Text(self, height=25); self.text.pack(fill=tk.BOTH, expand=True, padx=20, pady=10)
+
+    def generate(self):
+        self.text.delete("1.0", tk.END)
+        for r,marks in store.marks.items():
+            total = sum(int(m) for m in marks.values())
+            percent = total/len(marks) if marks else 0
+            status = "PASS" if percent>=40 else "FAIL"
+            store.results[r] = {"total":total,"percent":percent,"status":status}
+            self.text.insert(tk.END,f"{r} – Total: {total}, %: {percent:.2f}, {status}\n")
+
+# ------------------ Summary Page ------------------
+
