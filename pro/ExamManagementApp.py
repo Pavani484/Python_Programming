@@ -242,3 +242,16 @@ class HallTicketPage(tk.Frame):
         messagebox.showinfo("Done","Hall ticket numbers generated")
 
 # ------------------ Student–Program Mapping Page ------------------
+class StudentProgramMappingPage(tk.Frame):
+    def __init__(self, parent):
+        super().__init__(parent, bg="white")
+        tk.Label(self, text="Student–Program Mapping", font=("Arial", 14), bg="white").pack(pady=10)
+        self.text = tk.Text(self, height=25); self.text.pack(fill=tk.BOTH, expand=True, padx=20, pady=10)
+        tk.Button(self, text="Show Mapping", bg="#4682B4", fg="white", command=self.show).pack(pady=5)
+
+    def show(self):
+        self.text.delete("1.0", tk.END)
+        for r,s in store.students.items():
+            p = store.programs.get(s["program_id"],{}).get("name","-")
+            self.text.insert(tk.END, f"{r} – {s['name']} : Program {s['program_id']} ({p})\n")
+
