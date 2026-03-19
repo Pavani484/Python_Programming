@@ -350,3 +350,24 @@ class DecodingPage(tk.Frame):
             self.text.insert(tk.END, f"HallTicket {ht} → {r} ({store.students[r]['name']})\n")
 
 # ------------------ Marks Entry Page ------------------
+class MarksEntryPage(tk.Frame):
+    def __init__(self, parent, app):
+        super().__init__(parent, bg="white")
+        tk.Label(self, text="Marks Entry", font=("Arial", 14), bg="white").pack(pady=10)
+        self.student = ttk.Combobox(self, values=list(store.students.keys())); self.student.pack(pady=5)
+        self.course = ttk.Combobox(self, values=list(store.courses.keys())); self.course.pack(pady=5)
+        self.marks = tk.Entry(self); self.marks.pack(pady=5)
+        tk.Button(self, text="Add Marks", bg="#4CAF50", fg="white", command=self.add).pack(pady=5)
+        self.text = tk.Text(self, height=20); self.text.pack(fill=tk.BOTH, expand=True, padx=20, pady=10)
+
+    def add(self):
+        r = self.student.get().strip()
+        c = self.course.get().strip()
+        m = self.marks.get().strip()
+        if not r or not c or not m:
+            messagebox.showwarning("Input Error","Select student, course, enter marks")
+            return
+        store.marks.setdefault(r,{})[c]=m
+        self.text.insert(tk.END, f"{r} – {c} : {m}\n")
+
+# ------------------ Results Generation Page ------------------
