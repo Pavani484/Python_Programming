@@ -388,4 +388,24 @@ class ResultsGenPage(tk.Frame):
             self.text.insert(tk.END,f"{r} – Total: {total}, %: {percent:.2f}, {status}\n")
 
 # ------------------ Summary Page ------------------
+class SummaryPage(tk.Frame):
+    def __init__(self, parent, app):
+        super().__init__(parent, bg="white")
+        tk.Label(self, text="Pass/Fail & Totals", font=("Arial", 14), bg="white").pack(pady=10)
+        self.text = tk.Text(self, height=25); self.text.pack(fill=tk.BOTH, expand=True, padx=20, pady=10)
+        tk.Button(self, text="Show Summary", bg="#4682B4", fg="white", command=self.show).pack(pady=5)
 
+    def show(self):
+        self.text.delete("1.0", tk.END)
+        pass_count = sum(1 for r in store.results.values() if r["status"]=="PASS")
+        fail_count = sum(1 for r in store.results.values() if r["status"]=="FAIL")
+        self.text.insert(tk.END,f"PASS: {pass_count}\nFAIL: {fail_count}\n\n")
+        for r,res in store.results.items():
+            s = store.students[r]
+            self.text.insert(tk.END,f"{r} – {s['name']} : {res['status']} ({res['percent']:.2f}%)\n")
+
+# ------------------ Run ------------------
+if __name__ == "__main__":
+    app = ExamManagementApp()
+
+    app.mainloop()
