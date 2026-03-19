@@ -225,3 +225,20 @@ class StudentDetailsPage(tk.Frame):
         for item in self.tree.get_children():
             self.tree.delete(item)
 
+# ------------------ Hall Ticket Page ------------------
+class HallTicketPage(tk.Frame):
+    def __init__(self, parent, app):
+        super().__init__(parent, bg="white")
+        tk.Label(self, text="Generate Hall Ticket Numbers", font=("Arial", 14), bg="white").pack(pady=10)
+        tk.Button(self, text="Generate", bg="#4CAF50", fg="white", command=self.generate).pack(pady=5)
+        self.text = tk.Text(self, height=25); self.text.pack(fill=tk.BOTH, expand=True, padx=20, pady=10)
+
+    def generate(self):
+        self.text.delete("1.0", tk.END)
+        for i,(reg, st) in enumerate(store.students.items(), start=1):
+            ht = f"HT{1000+i}"
+            store.hall_tickets[reg] = ht
+            self.text.insert(tk.END, f"{reg} – {st['name']} : {ht}\n")
+        messagebox.showinfo("Done","Hall ticket numbers generated")
+
+# ------------------ Student–Program Mapping Page ------------------
