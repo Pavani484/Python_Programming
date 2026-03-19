@@ -284,3 +284,15 @@ class FeePage(tk.Frame):
             self.text.insert(tk.END, f"{r} – {s['name']} : Fee Paid\n")
 
 # ------------------ Exam Time Table Page ------------------
+class TimeTablePage(tk.Frame):
+    def __init__(self, parent):
+        super().__init__(parent, bg="white")
+        tk.Label(self, text="Exam Time Table", font=("Arial", 14), bg="white").pack(pady=10)
+        self.text = tk.Text(self, height=25); self.text.pack(fill=tk.BOTH, expand=True, padx=20, pady=10)
+        tk.Button(self, text="Show Time Table", bg="#4682B4", fg="white", command=self.show).pack(pady=5)
+
+    def show(self):
+        self.text.delete("1.0", tk.END)
+        for code,c in store.courses.items():
+            self.text.insert(tk.END, f"{code} – {c['name']} : Semester {c['sem']}\n")
+
