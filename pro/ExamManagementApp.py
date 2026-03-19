@@ -255,3 +255,19 @@ class StudentProgramMappingPage(tk.Frame):
             p = store.programs.get(s["program_id"],{}).get("name","-")
             self.text.insert(tk.END, f"{r} – {s['name']} : Program {s['program_id']} ({p})\n")
 
+# ------------------ Student–Course Mapping Page ------------------
+class StudentCourseMappingPage(tk.Frame):
+    def __init__(self, parent):
+        super().__init__(parent, bg="white")
+        tk.Label(self, text="Student–Course Mapping", font=("Arial", 14), bg="white").pack(pady=10)
+        self.text = tk.Text(self, height=25); self.text.pack(fill=tk.BOTH, expand=True, padx=20, pady=10)
+        tk.Button(self, text="Show Mapping", bg="#4682B4", fg="white", command=self.show).pack(pady=5)
+
+    def show(self):
+        self.text.delete("1.0", tk.END)
+        for r,s in store.students.items():
+            courses = [c for c,info in store.courses.items()
+                       if info["program"]==s["program_id"] and info["sem"]==s["sem"]]
+            self.text.insert(tk.END, f"{r} – {s['name']} : {', '.join(courses) if courses else 'No Courses'}\n")
+
+# -
