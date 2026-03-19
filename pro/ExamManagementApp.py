@@ -41,3 +41,30 @@ class ExamManagementApp(tk.Tk):
             "Attendance Sheet", "Decoding", "Marks Entry",
             "Results Generation", "Pass/Fail & Totals"
         ]
+
+        for i, mod in enumerate(modules):
+            b = tk.Button(sidebar, text=f"{i+1}. {mod}", bg="#87CEFA", fg="black",
+                          font=("Segoe UI", 12), relief="flat",
+                          command=lambda m=mod: self.show_page(m))
+            b.pack(fill=tk.X, pady=2, padx=5)
+
+        # Content Area
+        container = tk.Frame(self)
+        container.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+
+        # Pages
+        self.pages["Program Details"] = ProgramDetailsPage(container)
+        self.pages["Course Details"] = CourseDetailsPage(container)
+        self.pages["Student Details"] = StudentDetailsPage(container)
+        self.pages["Generate Hall Ticket Nos"] = HallTicketPage(container, self)
+        self.pages["Student–Program Mapping"] = StudentProgramMappingPage(container)
+        self.pages["Student–Course Mapping"] = StudentCourseMappingPage(container)
+        self.pages["Fee & Application"] = FeePage(container)
+        self.pages["Exam Time Table"] = TimeTablePage(container)
+        self.pages["Generate Hall Tickets"] = GenerateHallTicketsPage(container)
+        self.pages["Attendance Sheet"] = AttendancePage(container)
+        self.pages["Decoding"] = DecodingPage(container)
+        self.pages["Marks Entry"] = MarksEntryPage(container, self)
+        self.pages["Results Generation"] = ResultsGenPage(container, self)
+        self.pages["Pass/Fail & Totals"] = SummaryPage(container, self)
+
