@@ -296,3 +296,17 @@ class TimeTablePage(tk.Frame):
         for code,c in store.courses.items():
             self.text.insert(tk.END, f"{code} – {c['name']} : Semester {c['sem']}\n")
 
+# ------------------ Generate Hall Tickets Page ------------------
+class GenerateHallTicketsPage(tk.Frame):
+    def __init__(self, parent):
+        super().__init__(parent, bg="white")
+        tk.Label(self, text="Generate Hall Tickets", font=("Arial", 14), bg="white").pack(pady=10)
+        self.text = tk.Text(self, height=25); self.text.pack(fill=tk.BOTH, expand=True, padx=20, pady=10)
+        tk.Button(self, text="Show Tickets", bg="#4682B4", fg="white", command=self.show).pack(pady=5)
+
+    def show(self):
+        self.text.delete("1.0", tk.END)
+        for r,ht in store.hall_tickets.items():
+            s = store.students[r]
+            self.text.insert(tk.END, f"{s['name']} ({r}) – Hall Ticket: {ht}\n")
+
