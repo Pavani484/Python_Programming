@@ -310,3 +310,30 @@ class GenerateHallTicketsPage(tk.Frame):
             s = store.students[r]
             self.text.insert(tk.END, f"{s['name']} ({r}) – Hall Ticket: {ht}\n")
 
+# ------------------ Attendance Page ------------------
+class AttendancePage(tk.Frame):
+    def __init__(self, parent):
+        super().__init__(parent, bg="white")
+        tk.Label(self, text="Attendance Sheet", font=("Arial", 14), bg="white").pack(pady=10)
+        self.tree = ttk.Treeview(self, columns=("Reg","Name","HallTicket","Status"), show="headings")
+        self.tree.heading("Reg", text="Reg No")
+        self.tree.heading("Name", text="Name")
+        self.tree.heading("HallTicket", text="Hall Ticket")
+        self.tree.heading("Status", text="Status")
+        self.tree.pack(fill=tk.BOTH, expand=True, padx=20, pady=10)
+        tk.Button(self, text="Mark All Present", bg="#4CAF50", fg="white", command=self.mark_all).pack(pady=5)
+        self.refresh()
+
+    def refresh(self):
+        for item in self.tree.get_children(): self.tree.delete(item)
+        for r,ht in store.hall_tickets.items():
+            s = store.students[r]
+            status = store.attendance.get(ht,"Absent")
+            self.tree.insert("",tk.END,values=(r,s["name"],ht,status))
+
+    def mark_all(self):
+        for ht in store.hall_tickets.values():
+            store.attendance[ht] = "Present"
+        self.refresh()
+
+# ------------------ Decoding Page ------------------
